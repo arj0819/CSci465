@@ -24,6 +24,7 @@
 
     <target name="run" description="run the lexical analyzer" depends="compile">
         <java fork="true" failonerror="yes" classpath="${build.dir}" classname="Driver">
+            <arg description="the name of the input file" line="input.pas" />
         </java>
     </target>
 
