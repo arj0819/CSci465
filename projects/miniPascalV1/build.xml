@@ -1,0 +1,31 @@
+<!--
+     Aaron Johnnson - Mini Pascal - Version 1
+     CSci465
+
+     - build.xml -
+     This is a build script for use with Apache Ant, a java build utility.
+-->
+<project name="Mini Pascal (Lexical Analyzer) - Version 1" default="compile" basedir=".">
+
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+
+    <target name="clean" description="delete the build directory and contents">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" description="compile source" depends="clean, init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+    </target>
+
+    <target name="run" description="run the lexical analyzer" depends="compile">
+        <java fork="true" failonerror="yes" classpath="${build.dir}" classname="Driver">
+        </java>
+    </target>
+
+</project>
+
