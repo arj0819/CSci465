@@ -26,6 +26,13 @@ public class Lexer {
             programCounter++;
         }        
 
+        /*
+            Use switch case statements combined with finite automaton to
+            implement the token detection. Use JFLAP for the automaton, 
+            and simply take each state and use it as a case, then in that
+            case, set the next state and repeat until failure.
+        */
+
 
 
         // Match symbol = new Match("","");
