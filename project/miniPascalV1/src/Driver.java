@@ -12,6 +12,9 @@ public class Driver {
         }
 
         IOModule io = new IOModule(fileName);
+        Lexer lex = new Lexer(io.getProgramText());
+
+        lex.getsym();
 
     }
 
