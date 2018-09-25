@@ -12,18 +12,6 @@ public class Driver {
         }
 
         IOModule io = new IOModule(fileName);
-        
-        Match match1 = new Match(Definitions.ASSIGN,":=");
-        System.out.println(match1);
-        Match match2 = new Match(Definitions.AND,"and");
-        System.out.println(match2);
-        Match match3 = new Match(Definitions.BEGIN,"begin");
-        System.out.println(match3);
-        Match match4 = new Match(Definitions.FUNCTION,"function");
-        System.out.println(match4);
-        Match match5 = new Match(Definitions.SEMICOLON,";");
-        System.out.println(match5);
-
 
     }
 
