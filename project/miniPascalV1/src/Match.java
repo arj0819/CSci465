@@ -1,11 +1,14 @@
 public class Match {
 
+    private static int totalMatches = 0;
+    private int matchID = 0;
     private String lexeme = "";
     private String token = "";
 
     public Match (String lexeme, String token) {
         this.lexeme = lexeme;
         this.token = token;
+        this.matchID = ++totalMatches;
     }
 
     @Override
