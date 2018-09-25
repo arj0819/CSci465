@@ -1,4 +1,8 @@
-public final class Definitions {
+// import java.util.Hashtable;
+// import java.lang.reflect.Field;
+// import java.lang.reflect.Modifier;
+
+public final class Constants {
 
     //Pascal reserved word token names
     public static final String TOK_RW_AND       = "AND";
@@ -53,13 +57,14 @@ public final class Definitions {
     public static final String TOK_LP_READLN  = "READLN";
     public static final String TOK_LP_WRITE   = "WRITE";
     public static final String TOK_LP_WRITELN = "WRITELN";
+    public static final String TOK_LP_ERROR   = "ERROR";
 
     //Pascal literal datatype token names
     public static final String TOK_LIT_INT   = "INTLIT";
     public static final String TOK_LIT_REAL  = "REALLIT";
     public static final String TOK_LIT_CHAR  = "CHRLIT";
 
-    //Pascal regex for language pattern constructions
+    //Pascal regex for language pattern construStringctions
     public static final String REGEX_LETTER = "[a-zA-Z]";
     public static final String REGEX_DIGIT  = "[0-9]";
 
@@ -114,11 +119,29 @@ public final class Definitions {
 
     //Pascal regex for language patterns
     public static final String REGEX_PT_ID    = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
+    public static final String REGEX_PT_COMMENT = "\\{.*\\}";
     public static final String REGEX_PT_ADDOP = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
     public static final String REGEX_PT_RELOP = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
     // public static final String REGEX_PT_MULOP 
 
 
+    // private static Hashtable<String,String> pascalLanguageRules = new Hashtable<String,String>(); 
 
+
+    public Constants() {
+        // Field[] finalFields = Constants.class.getDeclaredFields();
+        // for (Field f : finalFields) {
+        //     if (Modifier.isFinal(f.getModifiers())) {
+        //         System.out.println(f.getName());
+        //     }
+        // }
+
+
+
+    }
+
+    // public Hashtable<String,String> getLanguageRules() {
+    //     return pascalLanguageRules;
+    // } 
 
 }
