@@ -148,6 +148,9 @@ public final class Language {
     public static final int ST_RPAREN                      = 10;
     public static final int ST_LETTER                      = 11;
     public static final int ST_ID                          = 12;
+    public static final int ST_COMMA                       = 13;
+    public static final int ST_SEMICOLON                   = 14;
+    public static final int ST_PERIOD                      = 15;
 
 
 
