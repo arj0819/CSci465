@@ -106,14 +106,16 @@ public final class Language {
     public static final String REGEX_RS_COLON      = ":";
     public static final String REGEX_RS_SEMICOLON  = ";";
     public static final String REGEX_RS_COMMA      = ",";
-    public static final String REGEX_RS_LPAREN     = "(";
-    public static final String REGEX_RS_RPAREN     = ")";
-    public static final String REGEX_RS_LSQBRACKET = "[";
-    public static final String REGEX_RS_RSQBRACKET = "]";
+    public static final String REGEX_RS_LPAREN     = "\\(";
+    public static final String REGEX_RS_RPAREN     = "\\)";
+    public static final String REGEX_RS_LSQBRACKET = "\\[";
+    public static final String REGEX_RS_RSQBRACKET = "\\]";
     public static final String REGEX_RS_LCRLYBRACK = "\\{";
     public static final String REGEX_RS_RCRLYBRACK = "}";
-    public static final String REGEX_RS_PERIOD     = ".";
-    public static final String REGEX_RS_RANGE      = "^..$";
+    public static final String REGEX_RS_LBIGRAM    = "\\(\\*";
+    public static final String REGEX_RS_RBIGRAM    = "\\*\\)";
+    public static final String REGEX_RS_PERIOD     = "\\.";
+    public static final String REGEX_RS_RANGE      = "^\\.\\.$";
 
     //Pascal regex for literal datatypes
     public static final String REGEX_LIT_INT = REGEX_DIGIT + "+";
@@ -124,18 +126,25 @@ public final class Language {
     //Pascal regex for language patterns
     public static final String REGEX_PT_ID       = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
     public static final String REGEX_PT_ANYTHING = ".*";
-    public static final String REGEX_PT_COMMENT  = REGEX_RS_LCRLYBRACK+REGEX_PT_ANYTHING+REGEX_RS_RCRLYBRACK;
+    public static final String REGEX_PT_CRLYCOMMENT  = REGEX_RS_LCRLYBRACK+REGEX_PT_ANYTHING+REGEX_RS_RCRLYBRACK;
+    public static final String REGEX_PT_BGRMCOMMENT  = REGEX_RS_LBIGRAM+REGEX_PT_ANYTHING+REGEX_RS_RBIGRAM;
     public static final String REGEX_PT_ADDOP    = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
     public static final String REGEX_PT_RELOP    = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
     // public static final String REGEX_PT_MULOP 
 
     //State names for Pascal language patterns
 
-    public static final int ST_COLON                       = 0;
-    public static final int ST_COLON_EQUALS                = 1;
-    public static final int ST_LCRLYBRK                    = 2;
-    public static final int ST_LCRLYBRK_IGNOREALL          = 3;
-    public static final int ST_LCRLYBRK_IGNOREALL_RCRLYBRK = 4;
+    public static final int ST_START                       = 0;
+    public static final int ST_COLON                       = 1;
+    public static final int ST_COLON_EQUALS                = 2;
+    public static final int ST_LCRLYBRK                    = 3;
+    public static final int ST_LCRLYBRK_IGNOREALL          = 4;
+    public static final int ST_LCRLYBRK_IGNOREALL_RCRLYBRK = 5;
+    public static final int ST_LPAREN                      = 6;
+    public static final int ST_LBIGRAM                     = 7;
+    public static final int ST_LBIGRAM_IGNOREALL           = 8;
+    public static final int ST_LBIGRAM_IGNOREALL_RBIGRAM   = 9;
+    public static final int ST_RPAREN                      = 10;
 
 
 
