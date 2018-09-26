@@ -1,4 +1,5 @@
 import java.util.regex.*;
+import java.util.Stack;
 
 public class Lexer {
 
@@ -14,6 +15,8 @@ public class Lexer {
     private int state = 0;
     private boolean hasSymbols = true;
     private boolean stopSearching = false;
+
+    private Stack<Integer> stateStack = new Stack<Integer>();
 
     public Lexer (String programText) {
         this.programText = programText;
@@ -34,7 +37,7 @@ public class Lexer {
             // If programCounter has reached programSize, we should stop
             // searching because we have run out of symbols in the programText.
             if (programCounter >= programSize) {
-                stopSearching = true;
+                stopSearching();
                 hasSymbols = false;
                 break;
             }
@@ -57,9 +60,10 @@ public class Lexer {
                 lineCounter++;
             }
 
+            System.out.println("CURRENT STATE: "+state);
             switch (state) {
                 case Language.ST_COLON : 
-                // System.out.println("HELLO from case 0");
+                    System.out.println("HELLO from Language.ST_COLON");
                     if (currentChar.matches(Language.REGEX_RS_COLON)) {
                         detectedToken = Language.TOK_RS_COLON;
                         currentLexeme += currentChar;
@@ -67,50 +71,61 @@ public class Lexer {
                         lookAheadCounter++;
                         currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
                         state = Language.ST_COLON_EQUALS;
+                        break;
                     } else {
-                        stopSearching = true;
+                        state = Language.ST_LCRLYBRK;
                         break;
                     }
-                case Language.ST_COLON_EQUALS:
-                // System.out.println("HELLO from case 1");
+                case Language.ST_COLON_EQUALS :
+                    System.out.println("HELLO from Language.ST_COLON_EQUALS");
                     if (currentLexeme.matches(Language.REGEX_RS_ASSIGN)) {
                         detectedToken = Language.TOK_RS_ASSIGN;
                         detectedLexeme = currentLexeme;
                         programCounter = lookAheadCounter;
 
-                        state = 0;
-                        stopSearching = true;
+                        System.out.println("State Reset by ST_COLON_EQUALS in the if");
+                        resetStateAndStopSearching();
                         break;
                     } else {
-                        state = 0;
-                        stopSearching = true;
+                        System.out.println("State Reset by ST_COLON_EQUALS in the else");
+                        resetStateAndStopSearching();
+                        break;
+                    }
+                case Language.ST_LCRLYBRK :
+                    System.out.println("HELLO from Language.ST_LCRLYBRK");
+                    if (currentChar.matches(Language.REGEX_RS_LCRLYBRACK)) {
+                        detectedToken = Language.TOK_LP_COMMENT;
+                        currentLexeme += currentChar;
+                        detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
+                        currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                        state = Language.ST_LCRLYBRK_IGNOREALL;
+                        break;
+                    } else {
+                        System.out.println("State Reset by ST_LCRLYBRK in the else");
+                        resetStateAndStopSearching();
+                        break;
+                    }
+                case Language.ST_LCRLYBRK_IGNOREALL :
+                    System.out.println("HELLO from Language.ST_LCRLYBRK_IGNOREALL");
+                    if (currentLexeme.matches(Language.REGEX_PT_COMMENT)) {
+                        detectedLexeme = currentLexeme;
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_LCRLYBRK_IGNOREALL in the if");
+                        resetStateAndStopSearching();
+                        break;
+                    } else {
+                        lookAheadCounter++;
+                        currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
                         break;
                     }
                 default:
-                    state = 0;
-                    stopSearching = true;
+                    System.out.println("State Reset by DEFAULT CASE");
+                    resetStateAndStopSearching();
                     break;
             }
             programCounter++;
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }        
 
         /*
@@ -119,7 +134,10 @@ public class Lexer {
             and simply take each state and use it as a case, then in that
             case, set the next state and repeat until failure.
         */
-
+        System.out.println("CURRENT LEXEME: "+currentLexeme);
+        if (!detectedLexeme.equals("")) {
+            System.out.println("RETURNED A LEXEME: " + detectedLexeme + " on line "+lineCounter);
+        }
         return detectedLexeme;
 
 
@@ -138,5 +156,15 @@ public class Lexer {
     public String getDetectedLexeme() {
         return detectedLexeme;
     }
-
+    public void resetStateAndStopSearching() {
+        state=0;
+        stopSearching();
+    }
+    public void resetState() {
+        System.out.println("STATE RESET from resetState()");
+        state=0;
+    }
+    public void stopSearching() {
+        stopSearching = true;
+    }
 }
