@@ -23,6 +23,7 @@ public final class Language {
     public static final String TOK_RW_PROCEDURE = "PROCEDURE";
     public static final String TOK_RW_PROGRAM   = "PROGRAM";
     public static final String TOK_RW_THEN      = "THEN";
+    public static final String TOK_RW_TO        = "TO";
     public static final String TOK_RW_VAR       = "VAR";
     public static final String TOK_RW_WHILE     = "WHILE";
 
@@ -71,26 +72,26 @@ public final class Language {
     public static final String REGEX_NEWLINE = "\n";
 
     //Pascal regex for reserved words
-    public static final String REGEX_RW_AND       = "^and$";
-    public static final String REGEX_RW_ARRAY     = "^array$";
-    public static final String REGEX_RW_BEGIN     = "^begin$";
-    public static final String REGEX_RW_DIV       = "^div$";
-    public static final String REGEX_RW_DO        = "^do$";
-    public static final String REGEX_RW_DOWNTO    = "^downto$";
-    public static final String REGEX_RW_ELSE      = "^else$";
-    public static final String REGEX_RW_END       = "^end$";
-    public static final String REGEX_RW_FOR       = "^for$";
-    public static final String REGEX_RW_FUNCTION  = "^function$";
-    public static final String REGEX_RW_IF        = "^if$";
-    public static final String REGEX_RW_MOD       = "^mod$";
-    public static final String REGEX_RW_NOT       = "^not$";
-    public static final String REGEX_RW_OF        = "^of$";
-    public static final String REGEX_RW_OR        = "^or$";
-    public static final String REGEX_RW_PROCEDURE = "^procedure$";
-    public static final String REGEX_RW_THEN      = "^then$";
-    public static final String REGEX_RW_TO        = "^to$";
-    public static final String REGEX_RW_VAR       = "^var$";
-    public static final String REGEX_RW_WHILE     = "^while$";
+    public static final String REGEX_RW_AND       = "and";
+    public static final String REGEX_RW_ARRAY     = "array";
+    public static final String REGEX_RW_BEGIN     = "begin";
+    public static final String REGEX_RW_DIV       = "div";
+    public static final String REGEX_RW_DO        = "do";
+    public static final String REGEX_RW_DOWNTO    = "downto";
+    public static final String REGEX_RW_ELSE      = "else";
+    public static final String REGEX_RW_END       = "end";
+    public static final String REGEX_RW_FOR       = "for";
+    public static final String REGEX_RW_FUNCTION  = "function";
+    public static final String REGEX_RW_IF        = "if";
+    public static final String REGEX_RW_MOD       = "mod";
+    public static final String REGEX_RW_NOT       = "not";
+    public static final String REGEX_RW_OF        = "of";
+    public static final String REGEX_RW_OR        = "or";
+    public static final String REGEX_RW_PROCEDURE = "procedure";
+    public static final String REGEX_RW_THEN      = "then";
+    public static final String REGEX_RW_TO        = "to";
+    public static final String REGEX_RW_VAR       = "var";
+    public static final String REGEX_RW_WHILE     = "while";
 
     //Pascal regex for reserved symbols
     public static final String REGEX_RS_PLUS       = "+";

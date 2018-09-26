@@ -243,8 +243,121 @@ public class Lexer {
                     currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
 
                     if (currentLexeme.matches(Language.REGEX_PT_ID)) {
-                        System.out.println("No state change - have not reached end of ID");
                         detectedLexeme = currentLexeme;
+
+                        boolean reservedWordFound = false;
+                        switch (detectedLexeme) {
+                            case Language.REGEX_RW_AND :
+                                System.out.println("State Reset by ST_ID - found an RW (and)");
+                                detectedToken = Language.TOK_RW_AND;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_ARRAY :
+                                System.out.println("State Reset by ST_ID - found an RW (array)");
+                                detectedToken = Language.TOK_RW_ARRAY;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_BEGIN :
+                                System.out.println("State Reset by ST_ID - found an RW (begin)");
+                                detectedToken = Language.TOK_RW_BEGIN;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_DIV :
+                                System.out.println("State Reset by ST_ID - found an RW (div)");
+                                detectedToken = Language.TOK_RW_DIV;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_DO :
+                                System.out.println("State Reset by ST_ID - found an RW (do)");
+                                detectedToken = Language.TOK_RW_DO;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_DOWNTO :
+                                System.out.println("State Reset by ST_ID - found an RW (downto)");
+                                detectedToken = Language.TOK_RW_DOWNTO;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_ELSE :
+                                System.out.println("State Reset by ST_ID - found an RW (else)");
+                                detectedToken = Language.TOK_RW_ELSE;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_END :
+                                System.out.println("State Reset by ST_ID - found an RW (end)");
+                                detectedToken = Language.TOK_RW_END;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_FOR :
+                                System.out.println("State Reset by ST_ID - found an RW (for)");
+                                detectedToken = Language.TOK_RW_FOR;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_FUNCTION :
+                                System.out.println("State Reset by ST_ID - found an RW (function)");
+                                detectedToken = Language.TOK_RW_FUNCTION;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_IF :
+                                System.out.println("State Reset by ST_ID - found an RW (if)");
+                                detectedToken = Language.TOK_RW_IF;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_MOD :
+                                System.out.println("State Reset by ST_ID - found an RW (mod)");
+                                detectedToken = Language.TOK_RW_MOD;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_NOT :
+                                System.out.println("State Reset by ST_ID - found an RW (not)");
+                                detectedToken = Language.TOK_RW_NOT;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_OF :
+                                System.out.println("State Reset by ST_ID - found an RW (of)");
+                                detectedToken = Language.TOK_RW_OF;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_OR :
+                                System.out.println("State Reset by ST_ID - found an RW (or)");
+                                detectedToken = Language.TOK_RW_OR;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_PROCEDURE :
+                                System.out.println("State Reset by ST_ID - found an RW (procedure)");
+                                detectedToken = Language.TOK_RW_PROCEDURE;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_THEN :
+                                System.out.println("State Reset by ST_ID - found an RW (then)");
+                                detectedToken = Language.TOK_RW_THEN;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_TO :
+                                System.out.println("State Reset by ST_ID - found an RW (to)");
+                                detectedToken = Language.TOK_RW_TO;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_VAR :
+                                System.out.println("State Reset by ST_ID - found an RW (var)");
+                                detectedToken = Language.TOK_RW_VAR;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            case Language.REGEX_RW_WHILE :
+                                System.out.println("State Reset by ST_ID - found an RW (while)");
+                                detectedToken = Language.TOK_RW_WHILE;
+                                reservedWordFound = true;
+                                resetStateAndStopSearching(); break;
+                            default:
+                                break;
+                        }
+
+                        if (reservedWordFound) {
+                            lookAheadCounter++;
+                            programCounter = lookAheadCounter;
+                            break;
+                        } else {
+                            System.out.println("No state change - have not reached end of ID");
+                        }
                         break;
                     } else {
                         if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
