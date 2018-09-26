@@ -2,7 +2,7 @@
 // import java.lang.reflect.Field;
 // import java.lang.reflect.Modifier;
 
-public final class Constants {
+public final class Language {
 
     //Pascal reserved word token names
     public static final String TOK_RW_AND       = "AND";
@@ -65,8 +65,9 @@ public final class Constants {
     public static final String TOK_LIT_CHAR  = "CHRLIT";
 
     //Pascal regex for language pattern construStringctions
-    public static final String REGEX_LETTER = "[a-zA-Z]";
-    public static final String REGEX_DIGIT  = "[0-9]";
+    public static final String REGEX_LETTER  = "[a-zA-Z]";
+    public static final String REGEX_DIGIT   = "[0-9]";
+    public static final String REGEX_NEWLINE = "\n";
 
     //Pascal regex for reserved words
     public static final String REGEX_RW_AND       = "^and$";

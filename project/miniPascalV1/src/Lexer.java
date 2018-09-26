@@ -31,7 +31,26 @@ public class Lexer {
                 throw new Exception("There was an erroneous token discovered on line "+lineCounter);
             }
 
-            if ("\n".equals(Character.toString(currentChar))) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (Constants.REGEX_NEWLINE.equals(Character.toString(currentChar))) {
                 lineCounter++;
             }
             programCounter++;
