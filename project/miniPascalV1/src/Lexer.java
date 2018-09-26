@@ -59,15 +59,15 @@ public class Lexer {
             switch (state) {
                 // --------------------\/-------------------- ST_START --------------------\/-------------------- //
                 case Language.ST_START :
-                    // start by increasing the program counter to look at
-                    // the next character in the programText
-                    programCounter++;
                     // Set the lookAheadCounter = to the programCounter so we 
                     // know where to start looking ahead from if necessary.
                     lookAheadCounter = programCounter;
                     // Set the currentChar to the char in the programText
                     // currently pointed to by the programCounter
                     currentChar = Character.toString(programText.charAt(programCounter));
+                    // then, we increment the program counter to look at
+                    // the next character in the programText next time around
+                    programCounter++;
 
                     // if (currentChar.matches(Language.REGEX_NEWLINE)) {
                     //     lineCounter++;
@@ -81,6 +81,8 @@ public class Lexer {
                         state = Language.ST_LPAREN;
                     } else if (currentChar.matches(Language.REGEX_RS_RPAREN)) {
                         state = Language.ST_RPAREN;
+                    } else if (currentChar.matches(Language.REGEX_LETTER)) {
+                        state = Language.ST_LETTER;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -220,8 +222,43 @@ public class Lexer {
                     detectedLexeme = currentLexeme;
                     System.out.println("State Reset by ST_RPAREN - found a RPAREN");
                     resetStateAndStopSearching();
-                break;
-            // --------------------/\-------------------- ST_RPAREN --------------------/\-------------------- //
+                    break;
+                // --------------------/\-------------------- ST_RPAREN --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_LETTER --------------------\/-------------------- //
+                case Language.ST_LETTER : 
+                    System.out.println("Entering ST_LETTER");
+
+                    detectedToken = Language.TOK_LP_ID;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    state = Language.ST_ID;
+                    break;
+            
+                // --------------------/\-------------------- ST_LETTER --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_ID --------------------\/-------------------- //
+                case Language.ST_ID : 
+                    System.out.println("Entering ST_ID");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+
+                    if (currentLexeme.matches(Language.REGEX_PT_ID)) {
+                        System.out.println("No state change - have not reached end of ID");
+                        detectedLexeme = currentLexeme;
+                        break;
+                    } else {
+                        if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
+                            System.out.println("Next Line Started");
+                            lineCounter++;
+                        } 
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_ID - found an ID");
+                        resetStateAndStopSearching();
+                        break;
+                    }
+            
+                // --------------------/\-------------------- ST_ID --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                 default:
                     System.out.println("State Reset by default case");
