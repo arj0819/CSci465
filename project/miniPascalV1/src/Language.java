@@ -145,6 +145,8 @@ public final class Language {
     public static final int ST_LBIGRAM_IGNOREALL           = 8;
     public static final int ST_LBIGRAM_IGNOREALL_RBIGRAM   = 9;
     public static final int ST_RPAREN                      = 10;
+    public static final int ST_LETTER                      = 11;
+    public static final int ST_ID                          = 12;
 
 
 
