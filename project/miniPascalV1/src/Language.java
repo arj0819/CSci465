@@ -7,7 +7,7 @@ public final class Language {
     //Pascal reserved word token names
     public static final String TOK_RW_AND       = "AND";
     public static final String TOK_RW_ARRAY     = "ARRAY";
-    public static final String TOK_RW_BEGIN     = "BEGAN";
+    public static final String TOK_RW_BEGIN     = "BEGIN";
     public static final String TOK_RW_DIV       = "DIVIDE";
     public static final String TOK_RW_DO        = "DO";
     public static final String TOK_RW_DOWNTO    = "DOWNTO";
@@ -125,24 +125,13 @@ public final class Language {
     public static final String REGEX_PT_RELOP = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
     // public static final String REGEX_PT_MULOP 
 
+    //State names for Pascal language patterns
 
-    // private static Hashtable<String,String> pascalLanguageRules = new Hashtable<String,String>(); 
-
-
-    public Constants() {
-        // Field[] finalFields = Constants.class.getDeclaredFields();
-        // for (Field f : finalFields) {
-        //     if (Modifier.isFinal(f.getModifiers())) {
-        //         System.out.println(f.getName());
-        //     }
-        // }
+    public static final int ST_COLON = 0;
+    public static final int ST_COLON_EQUALS = 1;
 
 
 
-    }
 
-    // public Hashtable<String,String> getLanguageRules() {
-    //     return pascalLanguageRules;
-    // } 
-
+    public Language() {}
 }

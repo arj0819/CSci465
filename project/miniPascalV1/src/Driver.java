@@ -16,12 +16,17 @@ public class Driver {
 
         try {
             while (lexer.isReady()) {
-                lexer.getsym();
+                String symbol = lexer.getsym();
+                if (!"".equals(symbol)) {
+                    io.addMatch(new Match(lexer.getDetectedToken(),lexer.getDetectedLexeme()));
+                }
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
+
+        io.printMatches();
 
     }
 
