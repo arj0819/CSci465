@@ -195,6 +195,7 @@ public class Lexer {
                     System.out.println("Entering ST_LBIGRAM_IGNOREALL");
                     if (currentLexeme.matches(Language.REGEX_PT_BGRMCOMMENT)) {
                         detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
                         programCounter = lookAheadCounter;
 
                         System.out.println("State Reset by ST_LBIGRAM_IGNOREALL - found a COMMENT");
@@ -245,6 +246,13 @@ public class Lexer {
                     if (currentLexeme.matches(Language.REGEX_PT_ID)) {
                         detectedLexeme = currentLexeme;
 
+                        // Set up a flag to determine whether we found a reserved word.
+                        // For each case, if the detectedLexeme matches any regex of a
+                        // reserved word, we will set the detectedToken to that of the
+                        // reserved word and waive the flag. We will also reset the 
+                        // state and stop searching because we have successfully 
+                        // determined the symbol, which should be returned to the 
+                        // Driver for I/O management by the IOModule.
                         boolean reservedWordFound = false;
                         switch (detectedLexeme) {
                             case Language.REGEX_RW_AND :
@@ -351,6 +359,11 @@ public class Lexer {
                                 break;
                         }
 
+                        // If we found a reserved word, we need to increment the
+                        // lookAheadCounter to point to the next char immediately
+                        // after it and set the programCounter to the lookAheadCounter.
+                        // Else, we don't change the state so we can continue searching
+                        // for the entire ID lexeme.
                         if (reservedWordFound) {
                             lookAheadCounter++;
                             programCounter = lookAheadCounter;
@@ -360,13 +373,20 @@ public class Lexer {
                         }
                         break;
                     } else {
+
+                        // If we didn't match the ID regex, but the next char is a newline,
+                        // we should increment the lineCounter to maintain proper line numbering.
                         if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
                             System.out.println("Next Line Started");
                             lineCounter++;
                         } 
-                        programCounter = lookAheadCounter;
 
+                        // We found an ID, so we should move the programCounter to
+                        // however far lookAheadCounter got successfully, then
+                        // reset the State and stop searching to allow this symbol
+                        // to be returned to the Driver and handled by IOModule.
                         System.out.println("State Reset by ST_ID - found an ID");
+                        programCounter = lookAheadCounter;
                         resetStateAndStopSearching();
                         break;
                     }
