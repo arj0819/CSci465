@@ -8,3 +8,11 @@ program example(input,output);
         read(x,y);
         write(gcd(x,y))
 end.
+(* 
+    This is a bigram comment. It can
+    be on multiple lines.
+*)
+{
+    This is a standard curly bracket comment.
+    It also be on multiple lines.
+}
