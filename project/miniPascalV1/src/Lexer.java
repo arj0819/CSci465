@@ -10,8 +10,11 @@ public class Lexer {
 
     private String currentLexeme = "";
     private String programText = "";
+    private String lexerReport = "";
     private int programCounter = 0;
     private int programSize = 0;
+    private int lineCounter = 1;
+    private boolean hasSymbols = true;
 
     public Lexer (String programText) {
         this.programText = programText;
@@ -19,12 +22,22 @@ public class Lexer {
     }
 
     // public String getsym() {
-    public void getsym() {
-
+    public void getsym() throws Exception{
         while (programCounter <= programSize) {
-            System.out.println(programText.charAt(programCounter));
+            char currentChar = programText.charAt(programCounter);
+            System.out.println(currentChar);
+
+            if (programCounter == 150) {
+                throw new Exception("There was an erroneous token discovered on line "+lineCounter);
+            }
+
+            if ("\n".equals(Character.toString(currentChar))) {
+                lineCounter++;
+            }
             programCounter++;
         }        
+
+        hasSymbols = false;
 
         /*
             Use switch case statements combined with finite automaton to
@@ -38,6 +51,10 @@ public class Lexer {
         // Match symbol = new Match("","");
         // matches.add(symbol);
         // return symbol.toString();
+    }
+
+    public boolean isReady() {
+        return hasSymbols;
     }
 
 }

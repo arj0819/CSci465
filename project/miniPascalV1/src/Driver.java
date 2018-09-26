@@ -12,9 +12,16 @@ public class Driver {
         }
 
         IOModule io = new IOModule(fileName);
-        Lexer lex = new Lexer(io.getProgramText());
+        Lexer lexer = new Lexer(io.getProgramText());
 
-        lex.getsym();
+        try {
+            while (lexer.isReady()) {
+                lexer.getsym();
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
 
     }
 
