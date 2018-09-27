@@ -89,6 +89,12 @@ public class Lexer {
                         state = Language.ST_SEMICOLON;
                     } else if (currentChar.matches(Language.REGEX_RS_EQU)) {
                         state = Language.ST_EQU;
+                    } else if (currentChar.matches(Language.REGEX_RS_LT)) {
+                        state = Language.ST_LT;
+                    } else if (currentChar.matches(Language.REGEX_RS_GT)) {
+                        state = Language.ST_GT;
+                    } else if (currentChar.matches(Language.REGEX_RS_PERIOD)) {
+                        state = Language.ST_PERIOD;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -400,35 +406,132 @@ public class Lexer {
             
                 // --------------------/\-------------------- ST_ID --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_COMMA --------------------\/-------------------- //
-                    case Language.ST_COMMA :
-                        System.out.println("Entering ST_COMMA");
-                        detectedToken = Language.TOK_RS_COMMA;
-                        currentLexeme += currentChar;
-                        detectedLexeme = currentLexeme;
-                        System.out.println("State Reset by ST_COMMA - found a COMMA");
-                        resetStateAndStopSearching();
-                        break;
+                case Language.ST_COMMA :
+                    System.out.println("Entering ST_COMMA");
+                    detectedToken = Language.TOK_RS_COMMA;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    System.out.println("State Reset by ST_COMMA - found a COMMA");
+                    resetStateAndStopSearching();
+                    break;
                 // --------------------/\-------------------- ST_COMMA --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_SEMICOLON --------------------\/-------------------- //
-                    case Language.ST_SEMICOLON :
-                        System.out.println("Entering ST_SEMICOLON");
-                        detectedToken = Language.TOK_RS_SEMICOLON;
-                        currentLexeme += currentChar;
-                        detectedLexeme = currentLexeme;
-                        System.out.println("State Reset by ST_SEMICOLON - found a SEMICOLON");
-                        resetStateAndStopSearching();
-                        break;
+                case Language.ST_SEMICOLON :
+                    System.out.println("Entering ST_SEMICOLON");
+                    detectedToken = Language.TOK_RS_SEMICOLON;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    System.out.println("State Reset by ST_SEMICOLON - found a SEMICOLON");
+                    resetStateAndStopSearching();
+                    break;
                 // --------------------/\-------------------- ST_SEMICOLON --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_EQU --------------------\/-------------------- //
-                    case Language.ST_EQU :
-                        System.out.println("Entering ST_EQU");
-                        detectedToken = Language.TOK_RS_EQU;
-                        currentLexeme += currentChar;
+                case Language.ST_EQU :
+                    System.out.println("Entering ST_EQU");
+                    detectedToken = Language.TOK_RS_EQU;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    System.out.println("State Reset by ST_EQU - found a EQU");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_EQU --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_LT --------------------\/-------------------- //
+                case Language.ST_LT : 
+                    System.out.println("Entering ST_LT");
+
+                    detectedToken = Language.TOK_RS_LT;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    state = Language.ST_LT_EQU;
+                    break;
+                // --------------------/\-------------------- ST_LT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_LT_EQU --------------------\/-------------------- //
+                case Language.ST_LT_EQU :
+                    System.out.println("Entering ST_LT_EQU");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                    System.out.println(currentLexeme);
+                    if (currentLexeme.matches(Language.REGEX_RS_LTE)) {
+                        detectedToken = Language.TOK_RS_LTE;
                         detectedLexeme = currentLexeme;
-                        System.out.println("State Reset by ST_EQU - found a EQU");
+                        lookAheadCounter++;
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_LT_EQU - found an LTE");
                         resetStateAndStopSearching();
                         break;
-            // --------------------/\-------------------- ST_EQU --------------------/\-------------------- //
+                    } else {
+                        System.out.println("Leaving ST_LT_EQU - did not find LTE");
+                        state = Language.ST_NE;
+                        break;
+                    }
+                // --------------------/\-------------------- ST_LT_EQU --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_NE --------------------\/-------------------- //
+                case Language.ST_NE : 
+                    System.out.println("Entering ST_NE");
+
+                    if (currentLexeme.matches(Language.REGEX_RS_NE)) {
+                        detectedToken = Language.TOK_RS_NE;
+                        detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_NE - found an NE");
+                        resetStateAndStopSearching();
+                    } else {
+
+                        System.out.println("State Reset by ST_NE - did not detect an NE");
+                        resetStateAndStopSearching();
+                    }
+                    break;
+                // --------------------/\-------------------- ST_NE --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_GT --------------------\/-------------------- //
+                case Language.ST_GT : 
+                    System.out.println("Entering ST_GT");
+
+                    detectedToken = Language.TOK_RS_GT;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    state = Language.ST_GT_EQU;
+                    break;
+                // --------------------/\-------------------- ST_GT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_GT_EQU --------------------\/-------------------- //
+                case Language.ST_GT_EQU :
+                    System.out.println("Entering ST_GT_EQU");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                    System.out.println(currentLexeme);
+                    if (currentLexeme.matches(Language.REGEX_RS_GTE)) {
+                        detectedToken = Language.TOK_RS_GTE;
+                        detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_GT_EQU - found an GTE");
+                        resetStateAndStopSearching();
+                        break;
+                    } else {
+                        System.out.println("State Reset by ST_GT_EQU - did not find GTE");
+                        resetStateAndStopSearching();
+                        break;
+                    }
+                // --------------------/\-------------------- ST_GT_EQU --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_PERIOD --------------------\/-------------------- //
+                case Language.ST_PERIOD : 
+                    System.out.println("Entering ST_PERIOD");
+
+                    detectedToken = Language.TOK_RS_PERIOD;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    
+                    System.out.println("State Reset by ST_PERIOD - found an PERIOD");
+                    resetStateAndStopSearching();
+                    hasSymbols = false;
+                    break;
+                
+                // --------------------/\-------------------- ST_PERIOD --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                     default:
                         System.out.println("State Reset by default case");
