@@ -95,6 +95,8 @@ public class Lexer {
                         state = Language.ST_GT;
                     } else if (currentChar.matches(Language.REGEX_RS_PERIOD)) {
                         state = Language.ST_PERIOD;
+                    } else if (currentChar.matches(Language.REGEX_DIGIT)) {
+                        state = Language.ST_DIGIT;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -518,6 +520,82 @@ public class Lexer {
                         break;
                     }
                 // --------------------/\-------------------- ST_GT_EQU --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_DIGIT --------------------\/-------------------- //
+                case Language.ST_DIGIT : 
+                    System.out.println("Entering ST_DIGIT");
+
+                    detectedToken = Language.TOK_LIT_INT;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    state = Language.ST_INTEGER;
+                    break;
+            
+                // --------------------/\-------------------- ST_DIGIT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_INTEGER --------------------\/-------------------- //
+                case Language.ST_INTEGER : 
+                    System.out.println("Entering ST_INTEGER");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+
+                    if (currentLexeme.matches(Language.REGEX_LIT_INT)) {
+                        detectedLexeme = currentLexeme;
+
+                        
+                        break;
+                    } else {
+                        if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
+                            System.out.println("Next Line Started");
+                            lineCounter++;
+                        } 
+                        
+                        String checkForDecimal = Character.toString(programText.charAt(lookAheadCounter));
+                        System.out.println(checkForDecimal);
+                        boolean decimalFound = false;
+                        switch (checkForDecimal) {
+                            case Language.REGEX_RS_DECIMAL :
+                                System.out.println("Leaving ST_INTEGER - found a decimal (.)");
+                                detectedToken = Language.TOK_LIT_REAL;
+                                detectedLexeme = currentLexeme;
+                                decimalFound = true;
+                                state = Language.ST_REAL; 
+                                break;
+                            default:
+                                break;
+                        }
+                        if (decimalFound) {
+                            programCounter = lookAheadCounter;
+                            break;
+                        }
+
+                        System.out.println("State Reset by ST_INTEGER - found an INTEGER");
+                        programCounter = lookAheadCounter;
+                        resetStateAndStopSearching();
+                        break;
+                    }
+                // --------------------/\-------------------- ST_INTEGER --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_REAL --------------------\/-------------------- //
+                case Language.ST_REAL : 
+                    System.out.println("Entering ST_REAL");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+
+                    if (currentLexeme.matches(Language.REGEX_LIT_REAL)) {
+                        detectedLexeme = currentLexeme;
+                        break;
+                    } else {
+                        if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
+                            System.out.println("Next Line Started");
+                            lineCounter++;
+                        } 
+
+                        System.out.println("State Reset by ST_REAL - found a REAL");
+                        programCounter = lookAheadCounter;
+                        resetStateAndStopSearching();
+                        break;
+                    }
+                // --------------------/\-------------------- ST_REAL --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_PERIOD --------------------\/-------------------- //
                 case Language.ST_PERIOD : 
                     System.out.println("Entering ST_PERIOD");
@@ -525,13 +603,33 @@ public class Lexer {
                     detectedToken = Language.TOK_RS_PERIOD;
                     currentLexeme += currentChar;
                     detectedLexeme = currentLexeme;
-                    
-                    System.out.println("State Reset by ST_PERIOD - found an PERIOD");
-                    resetStateAndStopSearching();
-                    hasSymbols = false;
+                    state = Language.ST_RANGE;
                     break;
                 
                 // --------------------/\-------------------- ST_PERIOD --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_RANGE --------------------\/-------------------- //
+                case Language.ST_RANGE :
+                    System.out.println("Entering ST_RANGE");
+                    lookAheadCounter++;
+                    System.out.println("Lookahead counter incremented");
+                    currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                    System.out.println(currentLexeme);
+                    if (currentLexeme.matches(Language.REGEX_RS_RANGE)) {
+                        detectedToken = Language.TOK_RS_RANGE;
+                        detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
+                        programCounter = lookAheadCounter;
+
+                        System.out.println("State Reset by ST_RANGE - found a RANGE");
+                        resetStateAndStopSearching();
+                        break;
+                    } else {
+                        System.out.println("State Reset by ST_RANGE - did not find RANGE");
+                        resetStateAndStopSearching();
+                        hasSymbols = false;
+                        break;
+                    }
+                // --------------------/\-------------------- ST_RANGE --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                     default:
                         System.out.println("State Reset by default case");
