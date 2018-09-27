@@ -1,7 +1,3 @@
-// import java.util.Hashtable;
-// import java.lang.reflect.Field;
-// import java.lang.reflect.Modifier;
-
 public final class Language {
 
     //Pascal reserved word token names
@@ -48,7 +44,7 @@ public final class Language {
     public static final String TOK_RS_PERIOD     = "PERIOD";
     public static final String TOK_RS_RANGE      = "RANGE";
 
-    //Pascal language patterns token names
+    //Pascal language pattern token names
     public static final String TOK_LP_ID      = "ID";
     public static final String TOK_LP_NUMBER  = "NUMBER";
     public static final String TOK_LP_STRING  = "STRING";
@@ -66,7 +62,7 @@ public final class Language {
     public static final String TOK_LIT_REAL  = "REALLIT";
     public static final String TOK_LIT_CHAR  = "CHRLIT";
 
-    //Pascal regex for language pattern construStringctions
+    //Pascal regex for language pattern constructions
     public static final String REGEX_LETTER  = "[a-zA-Z]";
     public static final String REGEX_DIGIT   = "[0-9]";
     public static final String REGEX_NEWLINE = "\n";
@@ -120,22 +116,20 @@ public final class Language {
     public static final String REGEX_RS_RANGE      = "\\.\\.";
 
     //Pascal regex for literal datatypes
-    public static final String REGEX_LIT_INT = REGEX_DIGIT + "+";
-    public static final String REGEX_LIT_REAL = REGEX_DIGIT + "+\\." +REGEX_DIGIT+"+";
-    public static final String REGEX_LIT_CHAR = "\'.\'";
+    public static final String REGEX_LIT_INT    = REGEX_DIGIT + "+";
+    public static final String REGEX_LIT_REAL   = REGEX_DIGIT + "+\\." +REGEX_DIGIT+"+";
+    public static final String REGEX_LIT_CHAR   = "\'.\'";
     public static final String REGEX_LIT_STRING = "\'.*\'";
 
-    //Pascal regex for language patterns
-    public static final String REGEX_PT_ID       = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
-    public static final String REGEX_PT_ANYTHING = ".*";
+    //Pascal regex for complex language patterns
+    public static final String REGEX_PT_ID           = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
+    public static final String REGEX_PT_ANYTHING     = ".*";
     public static final String REGEX_PT_CRLYCOMMENT  = REGEX_RS_LCRLYBRACK+REGEX_PT_ANYTHING+REGEX_RS_RCRLYBRACK;
     public static final String REGEX_PT_BGRMCOMMENT  = REGEX_RS_LBIGRAM+REGEX_PT_ANYTHING+REGEX_RS_RBIGRAM;
-    public static final String REGEX_PT_ADDOP    = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
-    public static final String REGEX_PT_RELOP    = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
-    // public static final String REGEX_PT_MULOP 
+    public static final String REGEX_PT_ADDOP        = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
+    public static final String REGEX_PT_RELOP        = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
 
-    //State names for Pascal language patterns
-
+    //State values for lexical analysis
     public static final int ST_START                       = 0;
     public static final int ST_COLON                       = 1;
     public static final int ST_COLON_EQUALS                = 2;
@@ -160,16 +154,9 @@ public final class Language {
     public static final int ST_DIGIT                       = 21;
     public static final int ST_INTEGER                     = 22;
     public static final int ST_REAL                        = 23;
+    public static final int ST_PERIOD                      = 24;
+    public static final int ST_RANGE                       = 25;
 
-
-
-
-
-    public static final int ST_PERIOD                      = -1;
-    public static final int ST_RANGE                       = -2;
-
-
-
-
+    //An empty constructor for readability
     public Language() {}
 }
