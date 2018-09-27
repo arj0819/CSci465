@@ -116,11 +116,12 @@ public final class Language {
     public static final String REGEX_RS_LBIGRAM    = "\\(\\*";
     public static final String REGEX_RS_RBIGRAM    = "\\*\\)";
     public static final String REGEX_RS_PERIOD     = "\\.";
-    public static final String REGEX_RS_RANGE      = "^\\.\\.$";
+    public static final String REGEX_RS_DECIMAL    = ".";
+    public static final String REGEX_RS_RANGE      = "\\.\\.";
 
     //Pascal regex for literal datatypes
     public static final String REGEX_LIT_INT = REGEX_DIGIT + "+";
-    public static final String REGEX_LIT_REAL = REGEX_DIGIT + "+\\.?" +REGEX_DIGIT+"+";
+    public static final String REGEX_LIT_REAL = REGEX_DIGIT + "+\\." +REGEX_DIGIT+"+";
     public static final String REGEX_LIT_CHAR = "\'.\'";
     public static final String REGEX_LIT_STRING = "\'.*\'";
 
@@ -150,20 +151,22 @@ public final class Language {
     public static final int ST_ID                          = 12;
     public static final int ST_COMMA                       = 13;
     public static final int ST_SEMICOLON                   = 14;
-    
     public static final int ST_EQU                         = 15;
     public static final int ST_LT                          = 16;
     public static final int ST_LT_EQU                      = 17;
     public static final int ST_NE                          = 18;
     public static final int ST_GT                          = 19;
     public static final int ST_GT_EQU                      = 20;
-
+    public static final int ST_DIGIT                       = 21;
+    public static final int ST_INTEGER                     = 22;
+    public static final int ST_REAL                        = 23;
 
 
 
 
 
     public static final int ST_PERIOD                      = -1;
+    public static final int ST_RANGE                       = -2;
 
 
 
