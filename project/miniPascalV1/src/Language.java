@@ -150,7 +150,20 @@ public final class Language {
     public static final int ST_ID                          = 12;
     public static final int ST_COMMA                       = 13;
     public static final int ST_SEMICOLON                   = 14;
-    public static final int ST_PERIOD                      = 15;
+    
+    public static final int ST_EQU                         = 15;
+    public static final int ST_LT                          = 16;
+    public static final int ST_LT_EQU                      = 17;
+    public static final int ST_NE                          = 18;
+    public static final int ST_GT                          = 19;
+    public static final int ST_GT_EQU                      = 20;
+
+
+
+
+
+
+    public static final int ST_PERIOD                      = -1;
 
 
 
