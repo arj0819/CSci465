@@ -660,24 +660,34 @@ public class Lexer {
         return detectedLexeme;
     }
 
+    // Returns whether the Lexer is ready to read symbols
     public boolean isReady() {
         return hasSymbols;
     }
 
+    // Returns the detectedToken
     public String getDetectedToken() {
         return detectedToken;
     }
+
+    // Returns the detectedLexeme
     public String getDetectedLexeme() {
         return detectedLexeme;
     }
+
+    // Used to reset the state and stopSearching
     public void resetStateAndStopSearching() {
         state = Language.ST_START;
         stopSearching();
     }
+
+    // Used to reset the state and restart searching from the first state
     public void resetState() {
         System.out.println("STATE RESET from resetState()");
         state = Language.ST_START;
     }
+
+    // Used to stop searching for more symbols to add to the detectedLexeme
     public void stopSearching() {
         stopSearching = true;
     }
