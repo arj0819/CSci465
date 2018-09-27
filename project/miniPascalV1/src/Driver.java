@@ -18,7 +18,7 @@ public class Driver {
             while (lexer.isReady()) {
                 String symbol = lexer.getsym();
                 if (!"".equals(symbol)) {// && !Language.TOK_LP_COMMENT.equals(lexer.getDetectedToken())
-                    io.addMatch(new Match(lexer.getDetectedToken(),lexer.getDetectedLexeme()));
+                    io.addMatch(new Match(lexer.getDetectedToken(),symbol));
                 }
             }
         } catch (Exception e) {
