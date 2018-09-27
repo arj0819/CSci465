@@ -83,6 +83,12 @@ public class Lexer {
                         state = Language.ST_RPAREN;
                     } else if (currentChar.matches(Language.REGEX_LETTER)) {
                         state = Language.ST_LETTER;
+                    } else if (currentChar.matches(Language.REGEX_RS_COMMA)) {
+                        state = Language.ST_COMMA;
+                    } else if (currentChar.matches(Language.REGEX_RS_SEMICOLON)) {
+                        state = Language.ST_SEMICOLON;
+                    } else if (currentChar.matches(Language.REGEX_RS_EQU)) {
+                        state = Language.ST_EQU;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -107,6 +113,7 @@ public class Lexer {
                     if (currentLexeme.matches(Language.REGEX_RS_ASSIGN)) {
                         detectedToken = Language.TOK_RS_ASSIGN;
                         detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
                         programCounter = lookAheadCounter;
 
                         System.out.println("State Reset by ST_COLON_EQUALS - found an ASSIGN");
@@ -392,11 +399,41 @@ public class Lexer {
                     }
             
                 // --------------------/\-------------------- ST_ID --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_COMMA --------------------\/-------------------- //
+                    case Language.ST_COMMA :
+                        System.out.println("Entering ST_COMMA");
+                        detectedToken = Language.TOK_RS_COMMA;
+                        currentLexeme += currentChar;
+                        detectedLexeme = currentLexeme;
+                        System.out.println("State Reset by ST_COMMA - found a COMMA");
+                        resetStateAndStopSearching();
+                        break;
+                // --------------------/\-------------------- ST_COMMA --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_SEMICOLON --------------------\/-------------------- //
+                    case Language.ST_SEMICOLON :
+                        System.out.println("Entering ST_SEMICOLON");
+                        detectedToken = Language.TOK_RS_SEMICOLON;
+                        currentLexeme += currentChar;
+                        detectedLexeme = currentLexeme;
+                        System.out.println("State Reset by ST_SEMICOLON - found a SEMICOLON");
+                        resetStateAndStopSearching();
+                        break;
+                // --------------------/\-------------------- ST_SEMICOLON --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_EQU --------------------\/-------------------- //
+                    case Language.ST_EQU :
+                        System.out.println("Entering ST_EQU");
+                        detectedToken = Language.TOK_RS_EQU;
+                        currentLexeme += currentChar;
+                        detectedLexeme = currentLexeme;
+                        System.out.println("State Reset by ST_EQU - found a EQU");
+                        resetStateAndStopSearching();
+                        break;
+            // --------------------/\-------------------- ST_EQU --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
-                default:
-                    System.out.println("State Reset by default case");
-                    resetStateAndStopSearching();
-                    break;
+                    default:
+                        System.out.println("State Reset by default case");
+                        resetStateAndStopSearching();
+                        break;
                 // --------------------/\-------------------- DEFAULT --------------------/\-------------------- //
             }
         }        
