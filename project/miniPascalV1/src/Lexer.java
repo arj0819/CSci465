@@ -117,6 +117,10 @@ public class Lexer {
                         state = Language.ST_MINUS;
                     } else if (currentChar.matches(Language.REGEX_RS_MULT)) {
                         state = Language.ST_MULT;
+                    } else if (currentChar.matches(Language.REGEX_RS_LSQBRACKET)) {
+                        state = Language.ST_LSQBRACKET;
+                    } else if (currentChar.matches(Language.REGEX_RS_RSQBRACKET)) {
+                        state = Language.ST_RSQBRACKET;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -666,6 +670,26 @@ public class Lexer {
                     resetStateAndStopSearching();
                     break;
                 // --------------------/\-------------------- ST_MULT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_LSQBRACKET --------------------\/-------------------- //
+                case Language.ST_LSQBRACKET :
+                    // System.out.println("Entering ST_LSQBRACKET");
+                    detectedToken = Language.TOK_RS_LSQBRACKET;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_LSQBRACKET - found a LSQBRACKET");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_LSQBRACKET --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_RSQBRACKET --------------------\/-------------------- //
+                case Language.ST_RSQBRACKET :
+                    // System.out.println("Entering ST_RSQBRACKET");
+                    detectedToken = Language.TOK_RS_RSQBRACKET;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_RSQBRACKET - found a RSQBRACKET");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_RSQBRACKET --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                 default:
                     // System.out.println("State Reset by default case");
