@@ -90,9 +90,9 @@ public final class Language {
     public static final String REGEX_RW_WHILE     = "while";
 
     //Pascal regex for reserved symbols
-    public static final String REGEX_RS_PLUS       = "+";
+    public static final String REGEX_RS_PLUS       = "\\+";
     public static final String REGEX_RS_MINUS      = "-";
-    public static final String REGEX_RS_MULT       = "*";
+    public static final String REGEX_RS_MULT       = "\\*";
     public static final String REGEX_RS_LT         = "<";
     public static final String REGEX_RS_LTE        = "^<=$";
     public static final String REGEX_RS_GT         = ">";
@@ -156,6 +156,9 @@ public final class Language {
     public static final int ST_REAL                        = 23;
     public static final int ST_PERIOD                      = 24;
     public static final int ST_RANGE                       = 25;
+    public static final int ST_PLUS                        = 26;
+    public static final int ST_MINUS                       = 27;
+    public static final int ST_MULT                        = 28;
 
     //An empty constructor for readability
     public Language() {}
