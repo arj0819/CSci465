@@ -7,7 +7,9 @@ program example(input,output);
     begin{gcd}
         while b<10 do
         begin
-            a := a + 1;
+            a:=a+1;
+            b:=a*2;
+            c:=b-a;
         end;
     end;{gcd}
     begin{example}
