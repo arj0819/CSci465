@@ -7,10 +7,16 @@ program example(input,output);
     begin{gcd}
         while b<10 do
         begin
-            a:=a+1;
-            b:=a*2;
-            c:=b-a;
-            d:=a/c;
+            if (a>0) then
+                a:=a+1;
+            if (b<>-1) then
+                b:=a*2;
+            if (c>=0) then    
+                c:=b-a;
+            if (d<=1000) then
+                d:=a/c;
+            else
+                e:=-200;
         end;
     end;{gcd}
     begin{example}
