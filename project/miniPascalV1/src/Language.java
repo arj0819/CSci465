@@ -159,6 +159,8 @@ public final class Language {
     public static final int ST_PLUS                        = 26;
     public static final int ST_MINUS                       = 27;
     public static final int ST_MULT                        = 28;
+    public static final int ST_LSQBRACKET                  = 29;
+    public static final int ST_RSQBRACKET                  = 30;
 
     //An empty constructor for readability
     public Language() {}
