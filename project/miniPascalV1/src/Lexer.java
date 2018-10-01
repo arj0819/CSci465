@@ -111,6 +111,12 @@ public class Lexer {
                         state = Language.ST_PERIOD;
                     } else if (currentChar.matches(Language.REGEX_DIGIT)) {
                         state = Language.ST_DIGIT;
+                    } else if (currentChar.matches(Language.REGEX_RS_PLUS)) {
+                        state = Language.ST_PLUS;
+                    } else if (currentChar.matches(Language.REGEX_RS_MINUS)) {
+                        state = Language.ST_MINUS;
+                    } else if (currentChar.matches(Language.REGEX_RS_MULT)) {
+                        state = Language.ST_MULT;
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -630,6 +636,36 @@ public class Lexer {
                     resetStateAndStopSearching();
                     break;
                 // --------------------/\-------------------- ST_RANGE --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_PLUS --------------------\/-------------------- //
+                case Language.ST_PLUS :
+                    // System.out.println("Entering ST_PLUS");
+                    detectedToken = Language.TOK_RS_PLUS;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_PLUS - found a PLUS");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_PLUS --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_MINUS --------------------\/-------------------- //
+                case Language.ST_MINUS :
+                    // System.out.println("Entering ST_MINUS");
+                    detectedToken = Language.TOK_RS_MINUS;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_MINUS - found a MINUS");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_MINUS --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_MULT --------------------\/-------------------- //
+                case Language.ST_MULT :
+                    // System.out.println("Entering ST_MULT");
+                    detectedToken = Language.TOK_RS_MULT;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_MULT - found a MULT");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_MULT --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                 default:
                     // System.out.println("State Reset by default case");
