@@ -258,7 +258,6 @@ public class Lexer {
                 case Language.ST_LETTER : 
                     // System.out.println("Entering ST_LETTER");
 
-                    detectedToken = Language.TOK_LP_ID;
                     currentLexeme += currentChar;
                     detectedLexeme = currentLexeme;
                     state = Language.ST_ID;
@@ -267,6 +266,7 @@ public class Lexer {
                 // --------------------/\-------------------- ST_LETTER --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_ID --------------------\/-------------------- //
                 case Language.ST_ID : 
+                    detectedToken = Language.TOK_LP_ID;
                     // System.out.println("Entering ST_ID");
                     lookAheadCounter++;
                     // System.out.println("Lookahead counter incremented");
@@ -287,103 +287,83 @@ public class Lexer {
                             case Language.REGEX_RW_AND :
                                 // System.out.println("State Reset by ST_ID - found an RW (and)");
                                 detectedToken = Language.TOK_RW_AND;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_ARRAY :
                                 // System.out.println("State Reset by ST_ID - found an RW (array)");
                                 detectedToken = Language.TOK_RW_ARRAY;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_BEGIN :
                                 // System.out.println("State Reset by ST_ID - found an RW (begin)");
                                 detectedToken = Language.TOK_RW_BEGIN;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_DIV :
                                 // System.out.println("State Reset by ST_ID - found an RW (div)");
                                 detectedToken = Language.TOK_RW_DIV;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_DO :
                                 // System.out.println("State Reset by ST_ID - found an RW (do)");
                                 detectedToken = Language.TOK_RW_DO;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_DOWNTO :
                                 // System.out.println("State Reset by ST_ID - found an RW (downto)");
                                 detectedToken = Language.TOK_RW_DOWNTO;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_ELSE :
                                 // System.out.println("State Reset by ST_ID - found an RW (else)");
                                 detectedToken = Language.TOK_RW_ELSE;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_END :
                                 // System.out.println("State Reset by ST_ID - found an RW (end)");
                                 detectedToken = Language.TOK_RW_END;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_FOR :
                                 // System.out.println("State Reset by ST_ID - found an RW (for)");
                                 detectedToken = Language.TOK_RW_FOR;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_FUNCTION :
                                 // System.out.println("State Reset by ST_ID - found an RW (function)");
                                 detectedToken = Language.TOK_RW_FUNCTION;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_IF :
                                 // System.out.println("State Reset by ST_ID - found an RW (if)");
                                 detectedToken = Language.TOK_RW_IF;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_MOD :
                                 // System.out.println("State Reset by ST_ID - found an RW (mod)");
                                 detectedToken = Language.TOK_RW_MOD;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_NOT :
                                 // System.out.println("State Reset by ST_ID - found an RW (not)");
                                 detectedToken = Language.TOK_RW_NOT;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_OF :
                                 // System.out.println("State Reset by ST_ID - found an RW (of)");
                                 detectedToken = Language.TOK_RW_OF;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_OR :
                                 // System.out.println("State Reset by ST_ID - found an RW (or)");
                                 detectedToken = Language.TOK_RW_OR;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_PROCEDURE :
                                 // System.out.println("State Reset by ST_ID - found an RW (procedure)");
                                 detectedToken = Language.TOK_RW_PROCEDURE;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_THEN :
                                 // System.out.println("State Reset by ST_ID - found an RW (then)");
                                 detectedToken = Language.TOK_RW_THEN;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_TO :
                                 // System.out.println("State Reset by ST_ID - found an RW (to)");
                                 detectedToken = Language.TOK_RW_TO;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true;break;
                             case Language.REGEX_RW_VAR :
                                 // System.out.println("State Reset by ST_ID - found an RW (var)");
                                 detectedToken = Language.TOK_RW_VAR;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_WHILE :
                                 // System.out.println("State Reset by ST_ID - found an RW (while)");
                                 detectedToken = Language.TOK_RW_WHILE;
-                                reservedWordFound = true;
-                                resetStateAndStopSearching(); break;
+                                reservedWordFound = true; break;
                             default:
                                 break;
                         }
@@ -393,9 +373,13 @@ public class Lexer {
                         // after it and set the programCounter to the lookAheadCounter.
                         // Else, we don't change the state so we can continue searching
                         // for the entire ID lexeme.
-                        if (reservedWordFound) {
+                        String nextChar = Character.toString(programText.charAt(lookAheadCounter+1));
+                        String tempID = currentLexeme + nextChar;
+
+                        if (reservedWordFound && !tempID.matches(Language.REGEX_PT_ID)) {
                             lookAheadCounter++;
                             programCounter = lookAheadCounter;
+                            resetStateAndStopSearching();
                             break;
                         } else {
                             // System.out.println("No state change - have not reached end of ID");
@@ -555,22 +539,17 @@ public class Lexer {
                     if (currentLexeme.matches(Language.REGEX_LIT_INT)) {
                         detectedLexeme = currentLexeme;
 
-                        
                         break;
                     } else {
-                        if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
-                            // System.out.println("Next Line Started");
-                            lineCounter++;
-                        } 
-                        
+
                         String checkForDecimal = Character.toString(programText.charAt(lookAheadCounter));
                         // System.out.println(checkForDecimal);
                         boolean decimalFound = false;
                         switch (checkForDecimal) {
                             case Language.REGEX_RS_DECIMAL :
                                 // System.out.println("Leaving ST_INTEGER - found a decimal (.)");
-                                detectedToken = Language.TOK_LIT_REAL;
-                                detectedLexeme = currentLexeme;
+                                // detectedToken = Language.TOK_LIT_REAL;
+                                // detectedLexeme = currentLexeme;
                                 decimalFound = true;
                                 state = Language.ST_REAL; 
                                 break;
@@ -594,15 +573,21 @@ public class Lexer {
                     lookAheadCounter++;
                     // System.out.println("Lookahead counter incremented");
                     currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
-
+                    // System.out.println("FROM REST_REAL: "+currentLexeme);
                     if (currentLexeme.matches(Language.REGEX_LIT_REAL)) {
+                        detectedToken = Language.TOK_LIT_REAL;
                         detectedLexeme = currentLexeme;
+                        // System.out.println(currentLexeme);
                         break;
                     } else {
                         if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
                             // System.out.println("Next Line Started");
                             lineCounter++;
                         } 
+                        if (currentLexeme.contains(Language.REGEX_RS_RANGE)) {
+                            resetStateAndStopSearching();
+                            break;
+                        }
 
                         // System.out.println("State Reset by ST_REAL - found a REAL");
                         programCounter = lookAheadCounter;
@@ -617,25 +602,12 @@ public class Lexer {
                     detectedToken = Language.TOK_RS_PERIOD;
                     currentLexeme += currentChar;
                     detectedLexeme = currentLexeme;
-                    state = Language.ST_RANGE;
-                    break;
-                
-                // --------------------/\-------------------- ST_PERIOD --------------------/\-------------------- //
-                // --------------------\/-------------------- ST_RANGE --------------------\/-------------------- //
-                case Language.ST_RANGE :
-                    // System.out.println("Entering ST_RANGE");
                     lookAheadCounter++;
                     // System.out.println("Lookahead counter incremented");
                     currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
                     // System.out.println(currentLexeme);
                     if (currentLexeme.matches(Language.REGEX_RS_RANGE)) {
-                        detectedToken = Language.TOK_RS_RANGE;
-                        detectedLexeme = currentLexeme;
-                        lookAheadCounter++;
-                        programCounter = lookAheadCounter;
-
-                        // System.out.println("State Reset by ST_RANGE - found a RANGE");
-                        resetStateAndStopSearching();
+                        state = Language.ST_RANGE;
                         break;
                     } else {
                         // System.out.println("State Reset by ST_RANGE - did not find RANGE");
@@ -643,12 +615,26 @@ public class Lexer {
                         hasSymbols = false;
                         break;
                     }
+                    // System.out.println(currentLexeme);
+                
+                // --------------------/\-------------------- ST_PERIOD --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_RANGE --------------------\/-------------------- //
+                case Language.ST_RANGE :
+                    // System.out.println("Entering ST_RANGE");
+                    detectedToken = Language.TOK_RS_RANGE;
+                    detectedLexeme = currentLexeme;
+                    lookAheadCounter++;
+                    programCounter = lookAheadCounter;
+
+                    // System.out.println("State Reset by ST_RANGE - found a RANGE");
+                    resetStateAndStopSearching();
+                    break;
                 // --------------------/\-------------------- ST_RANGE --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
-                    default:
-                        // System.out.println("State Reset by default case");
-                        resetStateAndStopSearching();
-                        break;
+                default:
+                    // System.out.println("State Reset by default case");
+                    resetStateAndStopSearching();
+                    break;
                 // --------------------/\-------------------- DEFAULT --------------------/\-------------------- //
             }
         }        
