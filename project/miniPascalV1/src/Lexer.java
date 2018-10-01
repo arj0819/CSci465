@@ -123,6 +123,9 @@ public class Lexer {
                         state = Language.ST_LSQBRACKET;
                     } else if (currentChar.matches(Language.REGEX_RS_RSQBRACKET)) {
                         state = Language.ST_RSQBRACKET;
+                    } else if (currentChar.matches(Language.REGEX_SINGLEQT)) {
+                        state = Language.ST_SINGLEQT;
+                        System.out.println(currentChar);
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -702,6 +705,52 @@ public class Lexer {
                     resetStateAndStopSearching();
                     break;
                 // --------------------/\-------------------- ST_RSQBRACKET --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_SINGLEQT --------------------\/-------------------- //
+                case Language.ST_SINGLEQT :
+                    // System.out.println("Entering ST_SINGLEQT");
+                    detectedToken = Language.TOK_LIT_STR;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    lookAheadCounter++;
+                    if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
+                        // System.out.println("Next Line Started");
+                        lineCounter++;
+                        currentLexeme += Character.toString(programText.charAt(lookAheadCounter)).replace("\n","\\n");
+                    } else {
+                        currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                    }
+                    // System.out.println("Leaving state ST_SINGLEQT - found a SINGLEQT");
+                    state = Language.ST_SINGLEQT_ACCEPTALL;
+                    break;
+                // --------------------/\-------------------- ST_SINGLEQT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_SINGLEQT_ACCEPTALL --------------------\/-------------------- //
+                case Language.ST_SINGLEQT_ACCEPTALL :
+                    // System.out.println("Entering ST_SINGLEQT_ACCEPTALL");
+                    if (currentLexeme.matches(Language.REGEX_LIT_STRING)) {
+                        detectedLexeme = currentLexeme;
+                        if (detectedLexeme.replace("'","").length()==1) {
+                            detectedToken = Language.TOK_LIT_CHAR;
+                        }
+                        lookAheadCounter++;
+                        programCounter = lookAheadCounter;
+
+                        // System.out.println("State Reset by ST_SINGLEQT_ACCEPTALL - found a STRING");
+                        resetStateAndStopSearching();
+                        break;
+                    } else {
+                        lookAheadCounter++;
+                        // System.out.println("Lookahead counter incremented");
+                        // System.out.println("No state change - have not yet detected SINGLEQT");
+                        if (Character.toString(programText.charAt(lookAheadCounter)).equals(Language.REGEX_NEWLINE)) {
+                            // System.out.println("Next Line Started");
+                            lineCounter++;
+                            currentLexeme += Character.toString(programText.charAt(lookAheadCounter)).replace("\n","\\n");
+                        } else {
+                            currentLexeme += Character.toString(programText.charAt(lookAheadCounter));
+                        }
+                        break;
+                    }
+                // --------------------/\-------------------- ST_SINGLEQT_ACCEPTALL --------------------/\-------------------- //
                 // --------------------\/-------------------- DEFAULT --------------------\/-------------------- //
                 default:
                     // System.out.println("State Reset by default case");
