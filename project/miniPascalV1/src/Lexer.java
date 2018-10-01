@@ -117,6 +117,8 @@ public class Lexer {
                         state = Language.ST_MINUS;
                     } else if (currentChar.matches(Language.REGEX_RS_MULT)) {
                         state = Language.ST_MULT;
+                    } else if (currentChar.matches(Language.REGEX_RS_DIVIDE)) {
+                        state = Language.ST_DIVIDE;
                     } else if (currentChar.matches(Language.REGEX_RS_LSQBRACKET)) {
                         state = Language.ST_LSQBRACKET;
                     } else if (currentChar.matches(Language.REGEX_RS_RSQBRACKET)) {
@@ -670,6 +672,16 @@ public class Lexer {
                     resetStateAndStopSearching();
                     break;
                 // --------------------/\-------------------- ST_MULT --------------------/\-------------------- //
+                // --------------------\/-------------------- ST_DIVIDE --------------------\/-------------------- //
+                case Language.ST_DIVIDE :
+                    // System.out.println("Entering ST_DIVIDE");
+                    detectedToken = Language.TOK_RW_DIV;
+                    currentLexeme += currentChar;
+                    detectedLexeme = currentLexeme;
+                    // System.out.println("State Reset by ST_DIVIDE - found a DIVIDE");
+                    resetStateAndStopSearching();
+                    break;
+                // --------------------/\-------------------- ST_DIVIDE --------------------/\-------------------- //
                 // --------------------\/-------------------- ST_LSQBRACKET --------------------\/-------------------- //
                 case Language.ST_LSQBRACKET :
                     // System.out.println("Entering ST_LSQBRACKET");
