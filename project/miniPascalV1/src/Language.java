@@ -113,7 +113,7 @@ public final class Language {
     public static final String REGEX_RS_RBIGRAM    = "\\*\\)";
     public static final String REGEX_RS_PERIOD     = "\\.";
     public static final String REGEX_RS_DECIMAL    = ".";
-    public static final String REGEX_RS_RANGE      = "\\.\\.";
+    public static final String REGEX_RS_RANGE      = "..";
 
     //Pascal regex for literal datatypes
     public static final String REGEX_LIT_INT    = REGEX_DIGIT + "+";
