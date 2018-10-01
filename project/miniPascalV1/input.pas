@@ -7,7 +7,7 @@ program example(input,output);
     function gcd(a,b:integer):integer;
     begin{gcd}
         while b<10 do
-        begin
+        begin{while}
             if (a>0) then
                 a:=a+1;
             if (b<>-1) then
@@ -15,10 +15,10 @@ program example(input,output);
             if (c>=0) then    
                 c:=b-a;
             if (d<=1000) then
-                d:=a/c;
+                d:=a/c mod 2;
             else
                 e:=-200;
-        end;
+        end;{while}
     end;{gcd}
     begin{example}
         read(x,y);
