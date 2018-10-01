@@ -93,6 +93,7 @@ public final class Language {
     public static final String REGEX_RS_PLUS       = "\\+";
     public static final String REGEX_RS_MINUS      = "-";
     public static final String REGEX_RS_MULT       = "\\*";
+    public static final String REGEX_RS_DIVIDE     = "/";
     public static final String REGEX_RS_LT         = "<";
     public static final String REGEX_RS_LTE        = "^<=$";
     public static final String REGEX_RS_GT         = ">";
@@ -159,8 +160,9 @@ public final class Language {
     public static final int ST_PLUS                        = 26;
     public static final int ST_MINUS                       = 27;
     public static final int ST_MULT                        = 28;
-    public static final int ST_LSQBRACKET                  = 29;
-    public static final int ST_RSQBRACKET                  = 30;
+    public static final int ST_DIVIDE                      = 29;
+    public static final int ST_LSQBRACKET                  = 30;
+    public static final int ST_RSQBRACKET                  = 31;
 
     //An empty constructor for readability
     public Language() {}
