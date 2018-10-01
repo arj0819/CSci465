@@ -23,6 +23,13 @@ public final class Language {
     public static final String TOK_RW_VAR       = "VAR";
     public static final String TOK_RW_WHILE     = "WHILE";
 
+    //Pascal reserved type specifier names
+    public static final String TOK_TS_INT       = "INTTYPE";
+    public static final String TOK_TS_REAL      = "REALTYPE";
+    public static final String TOK_TS_BOOL      = "BOOLTYPE";
+    public static final String TOK_TS_STRING    = "STRTYPE";
+    public static final String TOK_TS_CHAR      = "CHARTYPE";
+
     //Pascal reserved symbol token names
     public static final String TOK_RS_PLUS       = "PLUS";
     public static final String TOK_RS_MINUS      = "MINUS";
@@ -58,14 +65,17 @@ public final class Language {
     public static final String TOK_LP_ERROR   = "ERROR";
 
     //Pascal literal datatype token names
-    public static final String TOK_LIT_INT   = "INTLIT";
-    public static final String TOK_LIT_REAL  = "REALLIT";
-    public static final String TOK_LIT_CHAR  = "CHRLIT";
+    public static final String TOK_LIT_INT  = "INTLIT";
+    public static final String TOK_LIT_REAL = "REALLIT";
+    public static final String TOK_LIT_CHAR = "CHRLIT";
+    public static final String TOK_LIT_STR  = "STRLIT";
 
     //Pascal regex for language pattern constructions
-    public static final String REGEX_LETTER  = "[a-zA-Z]";
-    public static final String REGEX_DIGIT   = "[0-9]";
-    public static final String REGEX_NEWLINE = "\n";
+    public static final String REGEX_LETTER   = "[a-zA-Z]";
+    public static final String REGEX_DIGIT    = "[0-9]";
+    public static final String REGEX_NEWLINE  = "\n";
+    public static final String REGEX_SINGLEQT = "'";
+    public static final String REGEX_ANYTHING = ".*";
 
     //Pascal regex for reserved words
     public static final String REGEX_RW_AND       = "and";
@@ -120,15 +130,14 @@ public final class Language {
     public static final String REGEX_LIT_INT    = REGEX_DIGIT + "+";
     public static final String REGEX_LIT_REAL   = REGEX_DIGIT + "+\\." +REGEX_DIGIT+"+";
     public static final String REGEX_LIT_CHAR   = "\'.\'";
-    public static final String REGEX_LIT_STRING = "\'.*\'";
+    public static final String REGEX_LIT_STRING = REGEX_SINGLEQT + REGEX_ANYTHING + REGEX_SINGLEQT;
 
     //Pascal regex for complex language patterns
-    public static final String REGEX_PT_ID           = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
-    public static final String REGEX_PT_ANYTHING     = ".*";
-    public static final String REGEX_PT_CRLYCOMMENT  = REGEX_RS_LCRLYBRACK+REGEX_PT_ANYTHING+REGEX_RS_RCRLYBRACK;
-    public static final String REGEX_PT_BGRMCOMMENT  = REGEX_RS_LBIGRAM+REGEX_PT_ANYTHING+REGEX_RS_RBIGRAM;
-    public static final String REGEX_PT_ADDOP        = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
-    public static final String REGEX_PT_RELOP        = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
+    public static final String REGEX_PT_ID          = REGEX_LETTER+"("+REGEX_LETTER+"|"+REGEX_DIGIT+")*";
+    public static final String REGEX_PT_CRLYCOMMENT = REGEX_RS_LCRLYBRACK+REGEX_ANYTHING+REGEX_RS_RCRLYBRACK;
+    public static final String REGEX_PT_BGRMCOMMENT = REGEX_RS_LBIGRAM+REGEX_ANYTHING+REGEX_RS_RBIGRAM;
+    public static final String REGEX_PT_ADDOP       = "["+REGEX_RS_PLUS+REGEX_RS_MINUS+"]";
+    public static final String REGEX_PT_RELOP       = "^(^("+REGEX_RS_NE+")?|^("+REGEX_RS_LTE+")?|^("+REGEX_RS_GTE+")?|^("+REGEX_RS_LT+")?|^("+REGEX_RS_GT+")?|^("+REGEX_RS_EQU+")?)?";
 
     //State values for lexical analysis
     public static final int ST_START                       = 0;
@@ -163,6 +172,9 @@ public final class Language {
     public static final int ST_DIVIDE                      = 29;
     public static final int ST_LSQBRACKET                  = 30;
     public static final int ST_RSQBRACKET                  = 31;
+    public static final int ST_SINGLEQT                    = 32;
+    public static final int ST_SINGLEQT_ACCEPTALL          = 33;
+    public static final int ST_SINGLEQT_ACCEPTALL_SINGLEQT = 34;
 
     //An empty constructor for readability
     public Language() {}
