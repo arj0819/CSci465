@@ -10,6 +10,7 @@ program example(input,output);
             a:=a+1;
             b:=a*2;
             c:=b-a;
+            d:=a/c;
         end;
     end;{gcd}
     begin{example}
