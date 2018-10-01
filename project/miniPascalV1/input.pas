@@ -1,8 +1,9 @@
 program example(input,output);
     var x,y:integer;
     n: array [1..20] of integer;
-    chararray: array[char] of 1..26;
-    arrayOfChars: array[char] of 1..5;
+    hi: 'Hello, World!':string;
+    q:'q':char;
+    arrayOfChars: array[1..5] of char;
     function gcd(a,b:integer):integer;
     begin{gcd}
         while b<10 do
@@ -21,7 +22,8 @@ program example(input,output);
     end;{gcd}
     begin{example}
         read(x,y);
-        write(gcd(x,y))
+        write(gcd(x,y));
+        write(hi)
 end.
 (* 
     This is a bigram comment. It can
