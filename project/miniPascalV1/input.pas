@@ -1,4 +1,8 @@
-program example(input,output);
+{You must put tokens in the symbol table
+as you are parsing them. Also, there must
+be appropriate error handling!}
+
+program example(input,output); {Apparently, program, input and output are reserved words}
     var x,y:integer;
     n: array [1..20] of integer;
     hi: 'Hello, World!':string;
