@@ -125,7 +125,6 @@ public class Lexer {
                         state = Language.ST_RSQBRACKET;
                     } else if (currentChar.matches(Language.REGEX_SINGLEQT)) {
                         state = Language.ST_SINGLEQT;
-                        System.out.println(currentChar);
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
