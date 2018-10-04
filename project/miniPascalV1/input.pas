@@ -9,7 +9,7 @@ program example(input,output); {Apparently, program, input and output are reserv
     q:='q':char;
     result:=true:boolean;
     antiresult:=false:boolean;
-    pi:= 3.14159:real;
+    pi:= 3.14159:real;%
     arrayOfChars: array[1..5] of char;
     function gcd(a,b:integer):integer;
     begin{gcd}
