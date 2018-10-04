@@ -67,8 +67,16 @@ public final class Language {
     //Pascal literal datatype token names
     public static final String TOK_LIT_INT  = "INTLIT";
     public static final String TOK_LIT_REAL = "REALLIT";
+    public static final String TOK_LIT_BOOL = "BOOLLIT";
     public static final String TOK_LIT_CHAR = "CHRLIT";
     public static final String TOK_LIT_STR  = "STRLIT";
+
+    //Pascal data type names
+    public static final String TOK_TYPE_INT  = "INTTYPE";
+    public static final String TOK_TYPE_REAL = "REALTYPE";
+    public static final String TOK_TYPE_BOOL = "BOOLTYPE";
+    public static final String TOK_TYPE_CHAR = "CHRTYPE";
+    public static final String TOK_TYPE_STR  = "STRTYPE";
 
     //Pascal regex for language pattern constructions
     public static final String REGEX_LETTER   = "[a-zA-Z]";
@@ -81,6 +89,8 @@ public final class Language {
     public static final String REGEX_RW_AND       = "and";
     public static final String REGEX_RW_ARRAY     = "array";
     public static final String REGEX_RW_BEGIN     = "begin";
+    public static final String REGEX_RW_BOOL      = "boolean";
+    public static final String REGEX_RW_CHAR      = "char";
     public static final String REGEX_RW_DIV       = "div";
     public static final String REGEX_RW_DO        = "do";
     public static final String REGEX_RW_DOWNTO    = "downto";
@@ -89,11 +99,15 @@ public final class Language {
     public static final String REGEX_RW_FOR       = "for";
     public static final String REGEX_RW_FUNCTION  = "function";
     public static final String REGEX_RW_IF        = "if";
+    public static final String REGEX_RW_INT       = "integer";
     public static final String REGEX_RW_MOD       = "mod";
     public static final String REGEX_RW_NOT       = "not";
     public static final String REGEX_RW_OF        = "of";
     public static final String REGEX_RW_OR        = "or";
     public static final String REGEX_RW_PROCEDURE = "procedure";
+    public static final String REGEX_RW_PROGRAM   = "program";
+    public static final String REGEX_RW_REAL      = "real";
+    public static final String REGEX_RW_STR       = "string";
     public static final String REGEX_RW_THEN      = "then";
     public static final String REGEX_RW_TO        = "to";
     public static final String REGEX_RW_VAR       = "var";
