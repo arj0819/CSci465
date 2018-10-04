@@ -29,6 +29,7 @@ public class Lexer {
     private int lookAheadCounter = 0;
     private int programSize = 0;
     private int lineCounter = 1;
+    private int startLine = 1;
     private int state = 0;
     private boolean hasSymbols = true;
     private boolean stopSearching = false;
@@ -67,6 +68,7 @@ public class Lexer {
             if (currentChar.matches(Language.REGEX_NEWLINE)) {
                 // System.out.println("Next Line Started");
                 lineCounter++;
+                startLine = lineCounter;
             }
 
             // System.out.println("CURRENT STATE: "+state);
@@ -310,6 +312,14 @@ public class Lexer {
                                 // System.out.println("State Reset by ST_ID - found an RW (begin)");
                                 detectedToken = Language.TOK_RW_BEGIN;
                                 reservedWordFound = true; break;
+                            case Language.REGEX_RW_BOOL :
+                                // System.out.println("State Reset by ST_ID - found a TYPE (bool)");
+                                detectedToken = Language.TOK_TYPE_BOOL;
+                                reservedWordFound = true; break;
+                            case Language.REGEX_RW_CHAR :
+                                // System.out.println("State Reset by ST_ID - found a TYPE (char)");
+                                detectedToken = Language.TOK_TYPE_CHAR;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_DIV :
                                 // System.out.println("State Reset by ST_ID - found an RW (div)");
                                 detectedToken = Language.TOK_RW_DIV;
@@ -342,6 +352,10 @@ public class Lexer {
                                 // System.out.println("State Reset by ST_ID - found an RW (if)");
                                 detectedToken = Language.TOK_RW_IF;
                                 reservedWordFound = true; break;
+                            case Language.REGEX_RW_INT :
+                                // System.out.println("State Reset by ST_ID - found a TYPE (int)");
+                                detectedToken = Language.TOK_TYPE_INT;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_MOD :
                                 // System.out.println("State Reset by ST_ID - found an RW (mod)");
                                 detectedToken = Language.TOK_RW_MOD;
@@ -361,6 +375,18 @@ public class Lexer {
                             case Language.REGEX_RW_PROCEDURE :
                                 // System.out.println("State Reset by ST_ID - found an RW (procedure)");
                                 detectedToken = Language.TOK_RW_PROCEDURE;
+                                reservedWordFound = true; break;
+                            case Language.REGEX_RW_PROGRAM :
+                                // System.out.println("State Reset by ST_ID - found an RW (program)");
+                                detectedToken = Language.TOK_RW_PROGRAM;
+                                reservedWordFound = true; break;
+                            case Language.REGEX_RW_REAL :
+                                // System.out.println("State Reset by ST_ID - found a TYPE (real)");
+                                detectedToken = Language.TOK_TYPE_REAL;
+                                reservedWordFound = true; break;
+                            case Language.REGEX_RW_STR :
+                                // System.out.println("State Reset by ST_ID - found a TYPE (string)");
+                                detectedToken = Language.TOK_TYPE_STR;
                                 reservedWordFound = true; break;
                             case Language.REGEX_RW_THEN :
                                 // System.out.println("State Reset by ST_ID - found an RW (then)");
@@ -763,6 +789,7 @@ public class Lexer {
         // if (!detectedLexeme.equals("")) {
         //     System.out.println("RETURNED A LEXEME: " + detectedLexeme + " on line "+lineCounter);
         // }
+        System.out.println("On Line: "+lineCounter+" - "+detectedLexeme);
         return detectedLexeme;
     }
 
