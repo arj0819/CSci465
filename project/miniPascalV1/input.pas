@@ -5,10 +5,11 @@ be appropriate error handling!}
 program example(input,output); {Apparently, program, input and output are reserved words}
     var x,y:integer;
     n: array [1..20] of integer;
-    hi: 'Hello, World!':string;
-    q:'q':char;
-    result:true:boolean;
-    pi: 3.14159:real;
+    hi:= 'Hello, World!':string;
+    q:='q':char;
+    result:=true:boolean;
+    antiresult:=false:boolean;
+    pi:= 3.14159:real;
     arrayOfChars: array[1..5] of char;
     function gcd(a,b:integer):integer;
     begin{gcd}
