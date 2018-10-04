@@ -79,13 +79,14 @@ public final class Language {
     public static final String TOK_TYPE_STR  = "STRTYPE";
 
     //Pascal regex for language pattern constructions
-    public static final String REGEX_LETTER   = "[a-zA-Z]";
-    public static final String REGEX_DIGIT    = "[0-9]";
-    public static final String REGEX_TRUE     = "true";
-    public static final String REGEX_FALSE    = "false";
-    public static final String REGEX_NEWLINE  = "\n";
-    public static final String REGEX_SINGLEQT = "'";
-    public static final String REGEX_ANYTHING = ".*";
+    public static final String REGEX_LETTER     = "[a-zA-Z]";
+    public static final String REGEX_DIGIT      = "[0-9]";
+    public static final String REGEX_TRUE       = "true";
+    public static final String REGEX_FALSE      = "false";
+    public static final String REGEX_NEWLINE    = "\n";
+    public static final String REGEX_SINGLEQT   = "'";
+    public static final String REGEX_ANYTHING   = ".*";
+    public static final String REGEX_WHITESPACE = "\\s";
 
     //Pascal regex for reserved words
     public static final String REGEX_RW_AND       = "and";
