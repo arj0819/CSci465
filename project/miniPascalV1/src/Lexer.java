@@ -127,6 +127,12 @@ public class Lexer {
                         state = Language.ST_RSQBRACKET;
                     } else if (currentChar.matches(Language.REGEX_SINGLEQT)) {
                         state = Language.ST_SINGLEQT;
+                    } else if (currentChar.matches(Language.REGEX_WHITESPACE)) {
+                        //ignore
+                    } else {
+                        throw new Exception("Could not compile.\n"+
+                                            "Unrecognized token: "+currentChar+
+                                            "\nFound on line: "+lineCounter);
                     }
                     break;
                 // --------------------/\-------------------- ST_START --------------------/\-------------------- //
@@ -186,6 +192,7 @@ public class Lexer {
                     // System.out.println("Entering ST_LCRLYBRK_IGNOREALL");
                     if (currentLexeme.matches(Language.REGEX_PT_CRLYCOMMENT)) {
                         detectedLexeme = currentLexeme;
+                        lookAheadCounter++;
                         programCounter = lookAheadCounter;
 
                         // System.out.println("State Reset by ST_LCRLYBRK_IGNOREALL - found a COMMENT");
@@ -797,7 +804,7 @@ public class Lexer {
         // if (!detectedLexeme.equals("")) {
         //     System.out.println("RETURNED A LEXEME: " + detectedLexeme + " on line "+lineCounter);
         // }
-        System.out.println("On Line: "+lineCounter+" - "+detectedLexeme);
+        // System.out.println("On Line: "+lineCounter+" - "+detectedLexeme);
         return detectedLexeme;
     }
 
