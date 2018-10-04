@@ -340,6 +340,10 @@ public class Lexer {
                                 // System.out.println("State Reset by ST_ID - found an RW (end)");
                                 detectedToken = Language.TOK_RW_END;
                                 reservedWordFound = true; break;
+                            case Language.REGEX_FALSE :
+                                // System.out.println("State Reset by ST_ID - found an BOOLLIT (false)");
+                                detectedToken = Language.TOK_LIT_BOOL;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_FOR :
                                 // System.out.println("State Reset by ST_ID - found an RW (for)");
                                 detectedToken = Language.TOK_RW_FOR;
@@ -396,6 +400,10 @@ public class Lexer {
                                 // System.out.println("State Reset by ST_ID - found an RW (to)");
                                 detectedToken = Language.TOK_RW_TO;
                                 reservedWordFound = true;break;
+                            case Language.REGEX_TRUE :
+                                // System.out.println("State Reset by ST_ID - found an BOOLLIT (true)");
+                                detectedToken = Language.TOK_LIT_BOOL;
+                                reservedWordFound = true; break;
                             case Language.REGEX_RW_VAR :
                                 // System.out.println("State Reset by ST_ID - found an RW (var)");
                                 detectedToken = Language.TOK_RW_VAR;
