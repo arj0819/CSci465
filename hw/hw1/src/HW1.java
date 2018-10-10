@@ -23,8 +23,6 @@ public class HW1 {
 
     public static Stack<String> operatorStack = new Stack<String>();
     public static void main(String[] args) {
-
-        
         // Try to construct and read from the input file.
         try {
             String fileName = args[0];
@@ -33,49 +31,39 @@ public class HW1 {
             String currentLine = "";
 
             while (rdr.ready()) {
+                // read current line, split tokens on the space between them
                 currentLine = rdr.readLine();
                 String[] tokens = currentLine.split(" ");
                 System.out.println("Infix:\n"+currentLine+"\nPostfix:");
 
+                // for each token on this line...
                 for (int i = 0; i < tokens.length; i++) {
-                    // System.out.println(tokens[i]);
-
+                    // if it's an operand, simply print it out
                     if(tokens[i].matches("\\d+")) {
                         System.out.print(tokens[i]+" ");
-                    }
-                    if (operatorStack.isEmpty()) {
-                        if (tokens[i].matches(MULT)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(DIV)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(MOD)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(PLUS)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(MINUS)) {
-                            operatorStack.push(tokens[i]);
-                        } else {
-                            // System.out.print("Unrecognized operator");
-                        }
-                    } else if (operatorStack.peek().matches(PLUS) || operatorStack.peek().matches(MINUS)) {
-                        if (tokens[i].matches(MULT)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(DIV)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(MOD)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(PLUS)) {
-                            operatorStack.push(tokens[i]);
-                        } else if (tokens[i].matches(MINUS)) {
-                            operatorStack.push(tokens[i]);
-                        } else {
-                            // System.out.print("Unrecognized operator");
-                        }
-                    } else {
+                    } 
+                    // else, it must be an operator. If the stack is empty, push the operator
+                    else if (operatorStack.isEmpty()) {
+                        operatorStack.push(tokens[i]);
+                    } 
+                    // else, the top operator on the stack is of lowest precedence, simply push current 
+                    // operator on top of it. this takes care of operator precedence and associative properties
+                    else if (operatorStack.peek().matches(PLUS) || operatorStack.peek().matches(MINUS)) {
+                        operatorStack.push(tokens[i]);
+                    } 
+                    // else, current operator is of lowest precedence, so we pop the top operator
+                    // and print, then reevaluate the current operator (which is why we decrement i)
+                    else {
                         System.out.print(operatorStack.pop()+" ");
+                        i--;
                     }
-                    
 
+                    // if we ran out of tokens, we need to pop and print all operators remaining in the stack
+                    if (i == tokens.length-1) {
+                        while (!operatorStack.isEmpty()) {
+                            System.out.print(operatorStack.pop()+" ");
+                        }
+                    }
                 }
                 System.out.println("\n");
             }
